@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Haven Operations &amp; Reporting LLC — Monthly Bookkeeping &amp; Financial Reporting</title>
+<style>
+  :root{
+    --bg:#F7F4EF;
+    --card:#FFFFFF;
+    --text:#211C16;
+    --muted:#6B6558;
+    --faint:#9A9484;
+    --accent:#C1512F;
+    --accent-dark:#9A3E23;
+    --accent-tint:#F3E1D8;
+    --sage:#4C7A5D;
+    --sage-tint:#E9F0EA;
+    --border:#E7E1D3;
+    --chip-border:#D8D0BE;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--text);
+    font-family:Helvetica, Arial, sans-serif;
+    line-height:1.5;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:inherit;}
+  img{max-width:100%;}
+  :focus-visible{outline:3px solid var(--accent); outline-offset:2px;}
+
+  .wrap{max-width:920px; margin:0 auto; padding:0 24px;}
+
+  /* Header / brand mark */
+  header.site{
+    padding:28px 0 0;
+  }
+  .brandmark{display:flex; align-items:center; gap:12px;}
+  .hmark{
+    width:40px; height:40px; border-radius:50%;
+    background:var(--accent-tint);
+    display:flex; align-items:center; justify-content:center;
+    font-family:Georgia, 'Times New Roman', serif;
+    font-weight:700; font-size:20px; color:var(--accent);
+    flex-shrink:0;
+  }
+  .brandtext .name{font-weight:700; font-size:13px; letter-spacing:1px; color:var(--text);}
+  .brandtext .tagline{font-size:11px; color:var(--faint); letter-spacing:0.5px;}
+
+  /* Hero */
+  .hero{
+    padding:64px 0 56px;
+    display:grid;
+    grid-template-columns:1.1fr 0.9fr;
+    gap:48px;
+    align-items:center;
+  }
+  .eyebrow{
+    font-size:13px; font-weight:700; letter-spacing:3px; color:var(--accent);
+    text-transform:uppercase; margin:0 0 14px;
+  }
+  h1{
+    font-size:44px; line-height:1.08; margin:0 0 18px; font-weight:700; letter-spacing:-0.5px;
+  }
+  .lede{font-size:17px; color:var(--muted); margin:0 0 26px; max-width:46ch;}
+  .slogan{
+    font-family:Georgia,'Times New Roman',serif; font-style:italic;
+    font-size:22px; color:var(--accent-dark); margin:0 0 30px;
+  }
+  .cta-row{display:flex; gap:14px; flex-wrap:wrap;}
+  .btn{
+    display:inline-block; padding:14px 26px; border-radius:6px;
+    font-weight:700; font-size:15px; text-decoration:none;
+    transition:transform .15s ease, box-shadow .15s ease;
+  }
+  .btn:hover{transform:translateY(-1px);}
+  .btn-primary{background:var(--text); color:#fff;}
+  .btn-primary:hover{box-shadow:0 8px 20px rgba(33,28,22,0.25);}
+  .btn-ghost{background:transparent; color:var(--text); border:1.5px solid var(--chip-border);}
+
+  /* Ledger signature visual */
+  .ledger-card{
+    background:var(--card); border-radius:16px; padding:26px 24px;
+    box-shadow:0 18px 40px rgba(58,46,31,0.14);
+    opacity:0; transform:translateY(16px);
+    animation:riseIn .7s ease forwards .15s;
+  }
+  @keyframes riseIn{to{opacity:1; transform:none;}}
+  .ledger-head{font-size:13px; font-weight:700; letter-spacing:1.5px; color:var(--muted); margin-bottom:16px;}
+  .ledger-cols{display:grid; grid-template-columns:1fr 1fr; gap:0; border-top:1px solid var(--border);}
+  .ledger-cols div{padding:14px 8px 6px;}
+  .ledger-cols .col-label{font-size:11px; letter-spacing:1.5px; color:var(--faint); font-weight:700;}
+  .ledger-row{height:1px; background:var(--border); margin:10px 0;}
+  .ledger-cols .debit{border-right:1px solid var(--border);}
+  .ledger-total{font-family:Georgia,serif; font-weight:700; font-size:19px; margin-top:6px;}
+  .balance-check{
+    margin-top:18px; display:flex; align-items:center; gap:8px;
+    background:var(--sage-tint); color:var(--sage); border-radius:20px;
+    padding:9px 16px; font-size:13px; font-weight:700; width:fit-content;
+  }
+  .balance-check .dot{width:8px; height:8px; border-radius:50%; background:var(--sage);}
+
+  section{padding:56px 0; border-top:1px solid var(--border);}
+  h2{font-size:28px; margin:0 0 8px; font-weight:700;}
+  .section-sub{color:var(--muted); margin:0 0 34px; font-size:15.5px;}
+
+  /* Credential chips */
+  .chips{display:flex; flex-wrap:wrap; gap:10px; margin-top:22px;}
+  .chip{
+    background:#fff; border:1.5px solid var(--chip-border); border-radius:22px;
+    padding:9px 16px; font-size:13.5px; font-weight:700;
+  }
+
+  /* Pricing cards */
+  .pricing-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:20px;}
+  .price-card{
+    background:var(--card); border:1px solid var(--border); border-radius:14px;
+    padding:26px 22px; display:flex; flex-direction:column;
+  }
+  .price-card.featured{border-color:var(--accent); box-shadow:0 12px 30px rgba(193,81,47,0.12);}
+  .price-name{font-weight:700; font-size:13px; letter-spacing:1.5px; color:var(--muted); text-transform:uppercase;}
+  .price-amt{font-family:Georgia,serif; font-weight:700; font-size:34px; margin:8px 0 4px;}
+  .price-note{font-size:12.5px; color:var(--faint); margin-bottom:16px;}
+  .price-list{list-style:none; padding:0; margin:0 0 20px; flex-grow:1;}
+  .price-list li{
+    font-size:13.5px; color:var(--text); padding:6px 0 6px 20px; position:relative;
+  }
+  .price-list li:before{
+    content:"✓"; position:absolute; left:0; color:var(--sage); font-weight:700;
+  }
+  .price-fill{
+    font-size:12.5px; color:var(--faint); font-style:italic; border:1px dashed var(--chip-border);
+    border-radius:8px; padding:10px 12px;
+  }
+
+  /* About */
+  .about-body p{font-size:15.5px; color:var(--text); margin:0 0 16px; max-width:70ch;}
+  .stat-row{display:flex; gap:28px; flex-wrap:wrap; margin-top:26px;}
+  .stat{min-width:120px;}
+  .stat .num{font-family:Georgia,serif; font-weight:700; font-size:26px; color:var(--accent);}
+  .stat .label{font-size:12.5px; color:var(--muted); margin-top:2px;}
+
+  /* Sample work */
+  .sample-card{
+    background:var(--card); border:1px solid var(--border); border-radius:14px;
+    padding:24px; display:flex; gap:20px; align-items:center; flex-wrap:wrap;
+  }
+  .sample-icon{
+    width:56px; height:56px; border-radius:10px; background:var(--accent-tint);
+    display:flex; align-items:center; justify-content:center; font-size:22px; color:var(--accent);
+    flex-shrink:0; font-weight:700; font-family:Georgia,serif;
+  }
+  .sample-text{flex:1; min-width:220px;}
+  .sample-text h3{margin:0 0 4px; font-size:16.5px;}
+  .sample-text p{margin:0; color:var(--muted); font-size:13.5px;}
+
+  /* FAQ */
+  .faq-item{border-bottom:1px solid var(--border);}
+  .faq-item summary{
+    cursor:pointer; padding:18px 0; font-weight:700; font-size:15.5px;
+    display:flex; justify-content:space-between; align-items:center; list-style:none;
+  }
+  .faq-item summary::-webkit-details-marker{display:none;}
+  .faq-item summary:after{content:"+"; font-size:20px; color:var(--accent); font-weight:400;}
+  .faq-item[open] summary:after{content:"–";}
+  .faq-item p{margin:0 0 20px; color:var(--muted); font-size:14.5px; max-width:65ch;}
+
+  footer{padding:44px 0 60px; text-align:center;}
+  footer .fname{font-weight:700; font-size:13px; letter-spacing:2px; color:var(--muted);}
+  footer .fmeta{font-size:12px; color:var(--faint); margin-top:4px;}
+  footer .flinks{margin-top:18px; font-size:13.5px;}
+  footer .flinks a{color:var(--accent); text-decoration:none; font-weight:700;}
+
+  @media (max-width:760px){
+    .hero{grid-template-columns:1fr; padding-top:40px;}
+    h1{font-size:32px;}
+    .pricing-grid{grid-template-columns:1fr;}
+    .wrap{padding:0 20px;}
+  }
+  @media (prefers-reduced-motion: reduce){
+    .ledger-card{animation:none; opacity:1; transform:none;}
+    html{scroll-behavior:auto;}
+  }
+</style>
+</head>
+<body>
+
+<header class="site">
+  <div class="wrap">
+    <div class="brandmark">
+      <div class="hmark">H</div>
+      <div class="brandtext">
+        <div class="name">HAVEN OPERATIONS &amp; REPORTING</div>
+        <div class="tagline">Bookkeeping · Reconciliation · Financial Reporting</div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<section class="hero" style="border-top:none; padding-bottom:0;">
+  <div class="wrap" style="display:contents;">
+    <div>
+      <p class="eyebrow">Monthly Bookkeeping &amp; Financial Reporting</p>
+      <h1>Books your CPA won't have to redo.</h1>
+      <p class="lede">I help small businesses and busy owners get their books from &ldquo;I'm not sure where we stand&rdquo; to clean, reconciled, and ready for audit.</p>
+      <p class="slogan">Safety in Numbers.</p>
+      <div class="cta-row">
+        <a class="btn btn-primary" href="https://www.fiverr.com/r_holtham/provide-monthly-bookkeeping-and-financial-reporting" target="_blank" rel="noopener">View the Gig on Fiverr</a>
+        <a class="btn btn-ghost" href="#contact">Get in Touch</a>
+      </div>
+    </div>
+    <div class="ledger-card">
+      <div class="ledger-head">GENERAL LEDGER</div>
+      <div class="ledger-cols">
+        <div class="debit"><div class="col-label">DEBIT</div></div>
+        <div><div class="col-label">CREDIT</div></div>
+        <div class="debit"><div class="ledger-row"></div><div class="ledger-row"></div><div class="ledger-row"></div></div>
+        <div><div class="ledger-row"></div><div class="ledger-row"></div><div class="ledger-row"></div></div>
+        <div class="debit"><div class="ledger-total">$48,210</div></div>
+        <div><div class="ledger-total">$48,210</div></div>
+      </div>
+      <div class="balance-check"><span class="dot"></span> Reconciled &amp; balanced</div>
+    </div>
+  </div>
+</section>
+
+<section id="services">
+  <div class="wrap">
+    <h2>Services &amp; Pricing</h2>
+    <p class="section-sub">Bank &amp; credit card reconciliation, monthly bookkeeping, month-end close, AP/AR management, financial statement preparation, multi-entity reconciliation.</p>
+    <div class="pricing-grid">
+      <div class="price-card featured">
+        <div class="price-name">Basic</div>
+        <div class="price-amt">$90</div>
+        <div class="price-note">3-day delivery</div>
+        <ul class="price-list">
+          <li>1 entity</li>
+          <li>2 accounts</li>
+          <li>Up to 101 transactions</li>
+          <li>1 consultation session</li>
+          <li>Financial statement preparation</li>
+          <li>Internal controls execution</li>
+        </ul>
+      </div>
+      <div class="price-card">
+        <div class="price-name">Standard</div>
+        <div class="price-amt">—</div>
+        <div class="price-note">Copy exact price &amp; delivery from Fiverr</div>
+        <div class="price-fill">Fill in from the live Standard tab on your Fiverr gig — inclusions, transaction limit, and delivery time.</div>
+      </div>
+      <div class="price-card">
+        <div class="price-name">Premium</div>
+        <div class="price-amt">—</div>
+        <div class="price-note">Copy exact price &amp; delivery from Fiverr</div>
+        <div class="price-fill">Fill in from the live Premium tab on your Fiverr gig — inclusions, transaction limit, and delivery time.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="about">
+  <div class="wrap">
+    <h2>About</h2>
+    <p class="section-sub">10 years of progressive accounting experience, CPA-eligible.</p>
+    <div class="about-body">
+      <p>For the past 10 years, I've worked the accounting side of real, complicated businesses — most recently managing the full monthly close for a $1.6B private family office across 16 entities: general ledger maintenance, journal entries, bank reconciliations, and financial statement review every month.</p>
+      <p>I built tools that saved real time — an upload template that cut intercompany posting time by 50%, and an automated formatting macro that cut financial statement formatting time by 70%. Before that, I ran full-cycle AP/AR across multiple entities, handling 400+ invoices a month, and redesigned onboarding to improve AP productivity by 80%. I've also been hands-on through a full ERP migration (Great Plains to NetSuite) — chart of accounts mapping, data validation, parallel testing, and go-live support.</p>
+    </div>
+    <div class="stat-row">
+      <div class="stat"><div class="num">50%</div><div class="label">Faster intercompany posting</div></div>
+      <div class="stat"><div class="num">70%</div><div class="label">Faster statement formatting</div></div>
+      <div class="stat"><div class="num">80%</div><div class="label">AP productivity improvement</div></div>
+      <div class="stat"><div class="num">16</div><div class="label">Entities reconciled monthly</div></div>
+    </div>
+    <div class="chips">
+      <div class="chip">10 Years Experience</div>
+      <div class="chip">CPA-Eligible</div>
+      <div class="chip">Master's in Professional Accounting</div>
+      <div class="chip">QuickBooks · NetSuite · SAP</div>
+    </div>
+  </div>
+</section>
+
+<section id="sample-work">
+  <div class="wrap">
+    <h2>Sample Work</h2>
+    <p class="section-sub">A full 4-statement package built to demonstrate formatting and structure.</p>
+    <div class="sample-card">
+      <div class="sample-icon">PDF</div>
+      <div class="sample-text">
+        <h3>Odessa Publishing — Financial Statement Package</h3>
+        <p>Income Statement · Balance Sheet · Statement of Cash Flows · Trial Balance</p>
+      </div>
+      <a class="btn btn-ghost" href="odessa_publishing_financial_package.pdf" target="_blank" rel="noopener">View Sample PDF</a>
+    </div>
+  </div>
+</section>
+
+<section id="faq">
+  <div class="wrap">
+    <h2>FAQ</h2>
+    <p class="section-sub">The questions clients ask most before ordering.</p>
+
+    <details class="faq-item" open>
+      <summary>My books haven't been touched in months, can you help?</summary>
+      <p>Yes, catch-up and cleanup work is common. Message me with your last reconciled date and transaction volume for an accurate quote.</p>
+    </details>
+    <details class="faq-item">
+      <summary>Can you handle high invoice volume?</summary>
+      <p>Yes, I've processed 400+ invoices per month across multiple entities, including vendor onboarding and 1099/W-9 compliance.</p>
+    </details>
+    <details class="faq-item">
+      <summary>What software do you work in?</summary>
+      <p>QuickBooks Online, NetSuite, and SAP. Let me know what you're on before ordering.</p>
+    </details>
+    <details class="faq-item">
+      <summary>What counts as one "account"?</summary>
+      <p>A bank account or credit card account that needs reconciliation (e.g., checking, savings, business card). This is separate from "entities" — one business can have multiple accounts. Let me know exactly how many accounts and entities you have before ordering so I can recommend the right package.</p>
+    </details>
+    <details class="faq-item">
+      <summary>What if I need more accounts or entities than my package includes?</summary>
+      <p>No problem — additional accounts and entities are available as gig extras. Message me your full scope first, and I'll confirm pricing before you order.</p>
+    </details>
+    <details class="faq-item">
+      <summary>Is my financial data secure?</summary>
+      <p>I only work through Fiverr's official order system and agreed-upon secure file sharing — I never ask for banking passwords or login credentials outside your accounting software's own user-invite features.</p>
+    </details>
+  </div>
+</section>
+
+<footer id="contact">
+  <div class="wrap">
+    <div class="fname">HAVEN OPERATIONS &amp; REPORTING LLC</div>
+    <div class="fmeta">EST. 2026 · NEW JERSEY</div>
+    <div class="flinks">
+      <a href="https://www.fiverr.com/r_holtham/provide-monthly-bookkeeping-and-financial-reporting" target="_blank" rel="noopener">View Gig on Fiverr</a>
+      &nbsp;·&nbsp;
+      <a href="mailto:raholtham@gmail.com">Email Me</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
